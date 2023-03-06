@@ -7,14 +7,14 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
-
 public class OrderPage {
     private WebDriver driver;
     private final By name = By.xpath("//*/div/div[2]/div[2]/div[1]/input");//локатор для поля имя
     private final By surname = By.xpath("//*/div/div[2]/div[2]/div[2]/input");//локатор для поля фамилия
     private final By address = By.xpath("//*/div/div[2]/div[2]/div[3]/input");//локатор для поля адрес
     private final By metro = By.className("select-search");// локатор для поля метро
+    private final By selectedMetroStation = By.className("select-search__input");
+    private final By currentStMetro = By.className("select-search__select");
     private final By phone = By.xpath("//*/div/div[2]/div[2]/div[5]/input");//локатор для поля телефон
     private final By buttonNext = By.xpath("//*/div/div[2]/div[3]/button");//локатор для кнопки Далее
     private String userName;
@@ -43,10 +43,10 @@ public class OrderPage {
 
             element.click();
 
-            new WebDriverWait(driver, Duration.ofSeconds(2))
+            new WebDriverWait(driver, 2)
                     .until(ExpectedConditions.visibilityOfElementLocated(metro));
 
-            new WebDriverWait(driver, Duration.ofSeconds(2))
+            new WebDriverWait(driver, 2)
                     .until(ExpectedConditions.visibilityOfElementLocated(selectedMetroStation));
             WebElement element2 = driver.findElement(selectedMetroStation);
             element2.sendKeys(stationName);
@@ -55,6 +55,7 @@ public class OrderPage {
 
             WebElement element3 = driver.findElement(currentStMetro);
             element3.click();
+
         }
 
         public void setPhone (String userPhone){
